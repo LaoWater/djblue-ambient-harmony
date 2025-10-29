@@ -1,8 +1,10 @@
-# Welcome to your Lovable project
+# DJ Blue - Presentation Website
 
-## Project info
+## About
 
-**URL**: https://lovable.dev/projects/19e957d3-6991-4db1-bb98-96f186df1456
+DJ Blue is an AI-powered continuous companion that transforms conversations with real-time emotion detection, adaptive music curation, and intelligent assistance. This repository contains the presentation website showcasing DJ Blue's capabilities, features, and subscription offerings.
+
+**Visit**: [DJ Blue Website](https://lovable.dev/projects/19e957d3-6991-4db1-bb98-96f186df1456)
 
 ## How can I edit this code?
 
