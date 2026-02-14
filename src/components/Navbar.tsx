@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
 import { Music, Menu, X } from "lucide-react";
 import { useState } from "react";
-import logo from "@/assets/djblue-logo.jpg";
+import logo from "@/assets/djblue-logo_margins.png";
 
 const navLinks = [
   { name: "Features", path: "/features" },

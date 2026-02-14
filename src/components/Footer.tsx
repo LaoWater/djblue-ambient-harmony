@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, Twitter, Github, Linkedin } from "lucide-react";
-import logo from "@/assets/djblue-logo.jpg";
+import logo from "@/assets/djblue-logo_margins.png";
 
 const footerLinks = {
   Product: [
