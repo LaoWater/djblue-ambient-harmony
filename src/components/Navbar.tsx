@@ -53,9 +53,9 @@ export const Navbar = () => {
                 Log In
               </Button>
             </Link>
-            <Link to="/signup">
+            <Link to="/download">
               <Button size="sm" className="bg-primary hover:bg-primary/90 glow">
-                Get Started
+                Download Alpha
               </Button>
             </Link>
           </div>
@@ -95,9 +95,9 @@ export const Navbar = () => {
                     Log In
                   </Button>
                 </Link>
-                <Link to="/signup" onClick={() => setMobileMenuOpen(false)}>
+                <Link to="/download" onClick={() => setMobileMenuOpen(false)}>
                   <Button size="sm" className="w-full bg-primary hover:bg-primary/90">
-                    Get Started
+                    Download Alpha
                   </Button>
                 </Link>
               </div>

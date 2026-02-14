@@ -128,7 +128,7 @@ const PricingPage = () => {
                     </ul>
                   </div>
 
-                  <Link to="/signup" className="mt-8">
+                  <Link to="/download" className="mt-8">
                     <Button
                       className={`w-full ${
                         plan.popular
