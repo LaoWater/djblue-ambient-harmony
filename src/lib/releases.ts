@@ -38,7 +38,7 @@ export const PROJECT_RELEASES_URL =
 const PLATFORM_ORDER: Record<PlatformKey, RegExp[]> = {
   macos: [/macos$/i, /\.dmg$/i, /\.pkg$/i, /\.zip$/i],
   windows: [/windows\.exe$/i, /\.exe$/i, /\.msi$/i, /\.zip$/i],
-  linux: [/linux$/i, /\.appimage$/i, /\.deb$/i, /\.rpm$/i, /\.tar\.gz$/i, /\.zip$/i],
+  linux: [/\.appimage$/i, /\.deb$/i, /\.rpm$/i, /\.tar\.gz$/i, /linux$/i, /\.zip$/i],
 };
 
 const matchesMac = (name: string) =>

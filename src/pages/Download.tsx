@@ -60,7 +60,11 @@ const Download = () => {
   const [loadError, setLoadError] = useState<string | null>(null);
 
   const detectedPlatform = useMemo(() => detectClientPlatform(), []);
-  const recommendedPlatform: PlatformKey = detectedPlatform || "macos";
+  const appImageAsset =
+    release?.byPlatform.linux.find((asset) => /\.appimage$/i.test(asset.name)) || null;
+  const recommendedPlatform: PlatformKey = appImageAsset
+    ? "linux"
+    : detectedPlatform || "macos";
 
   useEffect(() => {
     let cancelled = false;
@@ -88,7 +92,8 @@ const Download = () => {
     };
   }, []);
 
-  const recommendedAsset = release?.bestByPlatform[recommendedPlatform] || null;
+  const recommendedAsset =
+    appImageAsset || release?.bestByPlatform[recommendedPlatform] || null;
   const releasesUrl = release?.releasesUrl || PROJECT_RELEASES_URL;
 
   return (
@@ -119,7 +124,9 @@ const Download = () => {
                     <Button asChild size="lg" className="bg-primary hover:bg-primary/90 glow">
                       <a href={recommendedAsset.url}>
                         <DownloadIcon className="w-4 h-4" />
-                        Download for {platformMeta[recommendedPlatform].label}
+                        {appImageAsset
+                          ? "Download AppImage (Linux)"
+                          : `Download for ${platformMeta[recommendedPlatform].label}`}
                       </a>
                     </Button>
                   ) : (
