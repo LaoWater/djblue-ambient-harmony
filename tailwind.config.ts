@@ -136,7 +136,7 @@ export default {
         'wave-pulse': "wave-pulse 2s ease-in-out infinite",
         float: "float 6s ease-in-out infinite",
         'glow-pulse': "glow-pulse 3s ease-in-out infinite",
-        'slide-up': "slide-up 0.6s ease-out forwards",
+        'slide-up': "slide-up 0.6s ease-out both",
         'fade-in': "fade-in 0.8s ease-out forwards",
         'scale-in': "scale-in 0.5s ease-out forwards",
       },

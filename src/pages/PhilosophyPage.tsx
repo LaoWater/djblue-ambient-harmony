@@ -7,7 +7,7 @@ const PhilosophyPage = () => {
     <div className="min-h-screen">
       <Navbar />
       <main className="pt-24 pb-16">
-        <Philosophy />
+        <Philosophy showMaintainers />
       </main>
       <Footer />
     </div>
