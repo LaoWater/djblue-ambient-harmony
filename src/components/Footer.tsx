@@ -7,7 +7,6 @@ const footerLinks = {
     { name: "Features", path: "/features" },
     { name: "Philosophy", path: "/philosophy" },
     { name: "Use Cases", path: "/use-cases" },
-    { name: "Pricing", path: "/pricing" },
   ],
   Resources: [
     { name: "Download", path: "/download" },

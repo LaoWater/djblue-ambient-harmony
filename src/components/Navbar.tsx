@@ -8,7 +8,6 @@ const navLinks = [
   { name: "Features", path: "/features" },
   { name: "Philosophy", path: "/philosophy" },
   { name: "Use Cases", path: "/use-cases" },
-  { name: "Pricing", path: "/pricing" },
 ];
 
 export const Navbar = () => {
