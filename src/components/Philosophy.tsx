@@ -166,7 +166,7 @@ export const Philosophy = ({ showMaintainers = false }: PhilosophyProps) => {
                   </div>
 
                   <div className="space-y-2 flex-1">
-                    <h3 className="text-2xl font-display font-bold group-hover:gradient-text transition-all duration-300">
+                    <h3 className="text-2xl font-display font-bold text-foreground transition-colors duration-300 group-hover:text-primary">
                       {principle.title}
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">

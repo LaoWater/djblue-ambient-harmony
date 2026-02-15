@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Mail, Twitter, Github, Linkedin } from "lucide-react";
 import logo from "@/assets/djblue-logo_margins.png";
 
@@ -22,6 +22,32 @@ const footerLinks = {
 };
 
 export const Footer = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const scrollToTopInstant = () => {
+    const root = document.documentElement;
+    const previousBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+    window.scrollTo(0, 0);
+    requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+      root.style.scrollBehavior = previousBehavior;
+    });
+  };
+
+  const handleFooterLinkClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    path: string
+  ) => {
+    event.preventDefault();
+    event.currentTarget.blur();
+    scrollToTopInstant();
+
+    if (location.pathname === path && location.hash === "") return;
+    navigate(path);
+  };
+
   return (
     <footer className="border-t border-border/50 py-12">
       <div className="container mx-auto px-6">
@@ -80,9 +106,10 @@ export const Footer = () => {
               <h3 className="font-display font-semibold mb-4">{category}</h3>
               <ul className="space-y-2">
                 {links.map((link) => (
-                  <li key={link.path}>
+                  <li key={`${category}-${link.name}-${link.path}`}>
                     <Link
                       to={link.path}
+                      onClick={(event) => handleFooterLinkClick(event, link.path)}
                       className="text-sm text-muted-foreground hover:text-primary transition-colors"
                     >
                       {link.name}
