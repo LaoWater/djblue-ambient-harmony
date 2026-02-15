@@ -1,3 +1,11 @@
+import { useEffect, useState } from "react";
+import { ExternalLink, RefreshCw, Users } from "lucide-react";
+import {
+  fetchProjectMaintainers,
+  PROJECT_REPO_URL,
+  type Maintainer,
+} from "@/lib/maintainers";
+
 const principles = [
   {
     title: "Ambient Intelligence",
@@ -25,11 +33,117 @@ const principles = [
   },
 ];
 
-export const Philosophy = () => {
+type PhilosophyProps = {
+  showMaintainers?: boolean;
+};
+
+export const Philosophy = ({ showMaintainers = false }: PhilosophyProps) => {
+  const [maintainers, setMaintainers] = useState<Maintainer[]>([]);
+  const [isLoadingMaintainers, setIsLoadingMaintainers] = useState(showMaintainers);
+  const [maintainersError, setMaintainersError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!showMaintainers) return;
+
+    let cancelled = false;
+
+    const loadMaintainers = async () => {
+      setIsLoadingMaintainers(true);
+      setMaintainersError(null);
+
+      try {
+        const list = await fetchProjectMaintainers();
+        if (!cancelled) {
+          setMaintainers(list);
+        }
+      } catch {
+        if (!cancelled) {
+          setMaintainers([]);
+          setMaintainersError("Could not load maintainers from GitHub right now.");
+        }
+      } finally {
+        if (!cancelled) {
+          setIsLoadingMaintainers(false);
+        }
+      }
+    };
+
+    void loadMaintainers();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [showMaintainers]);
+
   return (
     <section className="py-24 relative">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
+          {showMaintainers && (
+            <div className="glass-strong rounded-2xl p-6 mb-10 space-y-5 animate-slide-up">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                  <p className="text-xs tracking-[0.24em] uppercase text-muted-foreground">
+                    Maintainers
+                  </p>
+                  <h3 className="text-2xl font-display font-bold flex items-center gap-2">
+                    <Users className="w-5 h-5 text-primary" />
+                    Active Project Maintainers
+                  </h3>
+                </div>
+                <a
+                  href={PROJECT_REPO_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm text-primary hover:underline"
+                >
+                  View Repository
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              </div>
+
+              {isLoadingMaintainers && (
+                <p className="text-sm text-muted-foreground">
+                  Loading maintainers from GitHub...
+                </p>
+              )}
+
+              {!isLoadingMaintainers && maintainers.length > 0 && (
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {maintainers.map((maintainer) => (
+                    <a
+                      key={maintainer.username}
+                      href={maintainer.profileUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 rounded-lg border border-border/60 bg-card/60 p-3 hover:border-primary/50 transition-colors duration-300"
+                    >
+                      <img
+                        src={maintainer.avatarUrl}
+                        alt={`${maintainer.username} avatar`}
+                        className="w-10 h-10 rounded-full object-cover"
+                        loading="lazy"
+                      />
+                      <div className="min-w-0">
+                        <p className="font-medium truncate">{maintainer.username}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {maintainer.contributions} contributions
+                        </p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              )}
+
+              {!isLoadingMaintainers && maintainersError && (
+                <div className="text-sm text-amber-300/90 bg-amber-500/10 border border-amber-400/30 rounded-lg px-3 py-2 inline-flex items-center gap-2">
+                  <RefreshCw className="w-4 h-4" />
+                  {maintainersError}
+                </div>
+              )}
+            </div>
+          )}
+
           <div className="text-center mb-16 space-y-4 animate-slide-up">
             <h2 className="text-4xl md:text-6xl font-display font-bold">
               Our <span className="gradient-text">Philosophy</span>
@@ -52,7 +166,7 @@ export const Philosophy = () => {
                   </div>
 
                   <div className="space-y-2 flex-1">
-                    <h3 className="text-2xl font-display font-bold group-hover:gradient-text transition-all duration-300">
+                    <h3 className="text-2xl font-display font-bold text-foreground transition-colors duration-300 group-hover:text-primary">
                       {principle.title}
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">

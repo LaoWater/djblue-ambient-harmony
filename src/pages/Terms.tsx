@@ -5,96 +5,78 @@ import { FileText } from "lucide-react";
 const sections = [
   {
     title: "1. Acceptance of Terms",
-    content: `By accessing or using DJ Blue ("the Service"), you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you may not use the Service.
+    content: `By accessing or using DJ Blue (the "Service"), you agree to be bound by these Terms of Service. If you do not agree with these terms, do not use the Service.
 
-These terms apply to all users, including visitors, registered users, and subscribers. We recommend reviewing these terms periodically, as continued use constitutes acceptance of any updates.`
+These terms apply to visitors, registered users, and subscribers.`
   },
   {
     title: "2. Description of Service",
-    content: `DJ Blue is a continuous AI companion application that provides intelligent conversation, real-time emotion detection, and adaptive music curation. The Service includes:
+    content: `DJ Blue is an alpha-stage AI companion application. The Service may include:
 
-- The DJ Blue desktop and mobile applications
-- Account management and subscription services via this website
-- Software updates and feature enhancements delivered through the platform
+- Desktop application features (macOS, Windows, Linux)
+- Account and subscription features
+- Software updates and feature changes
 
-DJ Blue operates primarily as a **local application** on your device. Cloud services are limited to authentication, subscription management, and optional cross-device synchronization.`
+Some features run locally, some may run through BYOK provider integrations, and some future features may use DJ Blue-managed server processing as described in the Privacy Policy.`
   },
   {
-    title: "3. Account Registration",
-    content: `To access certain features, you must create an account. You agree to:
+    title: "3. Eligibility and Account Registration",
+    content: `To use account-based features, you must provide accurate registration data and keep account credentials secure.
 
-- Provide accurate, current, and complete registration information
-- Maintain the security of your password and account credentials
-- Notify us immediately of any unauthorized access at **contact@dj-blue.com**
-- Accept responsibility for all activity occurring under your account
+You must notify us promptly of unauthorized account access at **privacy@djblue.ai**.
 
-You must be at least 16 years of age to create an account and use the Service.`
+You must be at least 16 years old to use this Service where required by applicable law.`
   },
   {
-    title: "4. Subscription & Billing",
-    content: `DJ Blue offers both free and paid subscription tiers. For paid plans:
+    title: "4. Subscription and Billing",
+    content: `DJ Blue may offer free and paid tiers.
 
-**Billing Cycle:** Subscriptions are billed monthly or annually based on your selected plan. Charges are processed at the beginning of each billing period.
-
-**Free Trials:** If offered, free trials convert to paid subscriptions at the end of the trial period unless cancelled beforehand.
-
-**Refunds:** We offer a 14-day satisfaction guarantee for new subscriptions. Refund requests beyond this period are evaluated on a case-by-case basis.
-
-**Cancellation:** You may cancel your subscription at any time through your account dashboard. Access continues through the end of the current billing period.`
+For paid plans, billing cycle, renewal, cancellation, and refunds follow the terms shown at checkout or in your account settings.`
   },
   {
     title: "5. Acceptable Use",
-    content: `You agree not to use DJ Blue to:
+    content: `You agree not to:
 
-- Violate any applicable laws or regulations
-- Attempt to reverse-engineer, decompile, or extract source code from the application
-- Circumvent or disable security features or access restrictions
-- Distribute, sublicense, or resell access to the Service
-- Transmit malicious code, spam, or harmful content through the platform
-- Impersonate another person or misrepresent your affiliation
-
-We reserve the right to suspend or terminate accounts that violate these guidelines.`
+- Violate applicable laws
+- Attempt unauthorized access or security circumvention
+- Abuse, disrupt, or misuse the service
+- Distribute malicious content through service channels
+- Misrepresent identity or affiliation`
   },
   {
     title: "6. Intellectual Property",
-    content: `All content, branding, software, and technology comprising DJ Blue are the exclusive property of DJ Blue and its licensors. This includes but is not limited to:
+    content: `All software, branding, and site content are owned by the project maintainers and applicable licensors.
 
-- The DJ Blue name, logo, and visual identity
-- Application source code, algorithms, and architecture
-- Website content, copy, and design elements
-
-Your subscription grants a **limited, non-exclusive, non-transferable license** to use the Service for personal or authorized professional purposes. This license does not transfer any ownership rights.`
+Your access grants a limited, non-exclusive, non-transferable license to use the Service under these Terms.`
   },
   {
-    title: "7. Limitation of Liability",
-    content: `DJ Blue is provided on an "as is" and "as available" basis. To the maximum extent permitted by law:
+    title: "7. Alpha Status, Warranty Disclaimer, and Liability",
+    content: `DJ Blue is an experimental volunteer-run alpha and is provided on an "as is" and "as available" basis, to the maximum extent permitted by law.
 
-- We do not guarantee uninterrupted, error-free, or secure operation of the Service
-- We are not liable for any indirect, incidental, or consequential damages arising from your use of the Service
-- Our total liability shall not exceed the amount you paid for the Service in the 12 months preceding the claim
-
-This does not affect any rights that cannot be waived or limited under applicable consumer protection laws.`
+- We do not guarantee uninterrupted, error-free, or secure operation.
+- To the maximum extent permitted by law, we are not liable for indirect, incidental, or consequential damages.
+- Nothing in these Terms excludes liability for intentional misconduct, gross negligence, death/personal injury caused by negligence, or other non-waivable rights under applicable law.`
   },
   {
     title: "8. Termination",
-    content: `We may suspend or terminate your access to the Service at our discretion if:
+    content: `We may suspend or terminate access where required for security, legal compliance, abuse prevention, or material breach of these Terms.
 
-- You breach any provision of these Terms
-- Your account has been inactive for an extended period
-- We are required to do so by law
-
-Upon termination, your right to use the Service ceases immediately. Provisions that by their nature should survive termination (including intellectual property, limitation of liability, and dispute resolution) shall remain in effect.`
+Provisions that should survive termination remain in effect.`
   },
   {
-    title: "9. Governing Law",
-    content: `These Terms shall be governed by and construed in accordance with applicable laws, without regard to conflict of law principles. Any disputes arising under these terms shall be resolved through good-faith negotiation before pursuing formal proceedings.`
+    title: "9. Project Status, Governing Law, and Disputes",
+    content: `DJ Blue is currently a volunteer-run alpha project and is not operated by an incorporated company at this time.
+
+Current project ownership and maintainer information are published in the public repository: **https://github.com/RaresKeY/dj-blue-ai**.
+
+Disputes or legal concerns should first be addressed through good-faith discussion via **privacy@djblue.ai**. Mandatory consumer and data-protection rights always apply.`
   },
   {
     title: "10. Contact",
-    content: `For questions or concerns regarding these Terms of Service:
+    content: `For terms and legal/privacy questions:
 
-**Email:** contact@dj-blue.com  
-**Response Time:** Within 2 business days`
+**Email:** privacy@djblue.ai  
+**Response Time:** Within 7 business days`
   }
 ];
 
@@ -113,9 +95,9 @@ const Terms = () => {
               Terms of <span className="gradient-text">Service</span>
             </h1>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Clear, fair terms that govern your use of DJ Blue. We believe in transparency — no hidden clauses, no surprises.
+              Clear terms governing your use of DJ Blue.
             </p>
-            <p className="text-sm text-muted-foreground/60">Last Updated: February 11, 2026</p>
+            <p className="text-sm text-muted-foreground/60">Last Updated: February 15, 2026</p>
           </div>
 
           {/* Sections */}

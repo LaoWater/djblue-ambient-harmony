@@ -4,75 +4,99 @@ import { Shield } from "lucide-react";
 
 const sections = [
   {
-    title: "1. Information We Collect",
-    content: `When you use DJ Blue, we collect only the minimum information necessary to provide and improve our services. This includes:
+    title: "1. Controller and Project Status",
+    content: `DJ Blue is currently operated as a volunteer-run alpha project and is not operated by an incorporated company at this time.
 
-**Account Information:** Your name, email address, and encrypted password when you create an account.
+For privacy matters, contact **privacy@djblue.ai**.
 
-**Usage Data:** Anonymous interaction patterns, feature usage statistics, and session duration to improve your experience. This data is never tied to personally identifiable information.
-
-**Payment Information:** Billing details are processed securely through our third-party payment processor. DJ Blue never stores your full credit card number or financial credentials on our servers.
-
-**Device Information:** Basic device type, operating system, and application version to ensure compatibility and deliver updates.`
+If appointment of an EU representative or DPO becomes legally required, those details will be published in this policy.`
   },
   {
-    title: "2. How We Use Your Information",
-    content: `Your data is used exclusively to:
+    title: "2. Information We Collect",
+    content: `When you use DJ Blue, we collect information needed to provide, secure, and improve the service. This includes:
 
-- Provide, maintain, and improve DJ Blue's services
-- Process your subscription and manage your account
-- Send essential service communications (security alerts, billing updates)
-- Develop new features based on aggregate, anonymized usage patterns
-- Ensure platform security and prevent abuse
+**Account Information:** Name, email address, and encrypted password used for account access.
 
-We do **not** sell, rent, or trade your personal information to third parties. Ever.`
+**Usage Data:** Interaction events, feature usage statistics, and reliability diagnostics used to operate and improve the service.
+
+**Payment Information:** Billing details are handled by third-party payment providers. DJ Blue does not store full card numbers on project-managed servers.
+
+**Device Information:** Device type, operating system, and app version used for compatibility and support.
+
+**Support Data:** Information you submit through contact/support channels.`
   },
   {
-    title: "3. Local-First Architecture",
-    content: `DJ Blue is designed with a **local-first philosophy**. Your conversations, preferences, and interaction history are processed and stored locally on your device. Our servers facilitate account management and subscription services only.
+    title: "3. Processing Modes",
+    content: `DJ Blue may operate in multiple processing modes:
 
-This means your most sensitive data — the conversations you have and the emotional context within them — never leaves your machine unless you explicitly choose to sync across devices.`
+- **Local Mode (default):** Data is processed on-device by local models/tools.
+- **BYOK Mode:** If you configure your own API key, requests are sent from your device to the provider tied to that key (for example, Google APIs).
+- **DJ Blue Server Mode (future, if enabled):** Some requests may be processed through DJ Blue-managed servers. If enabled, this policy will describe categories, legal bases, retention, and transfer safeguards before rollout.`
   },
   {
-    title: "4. Data Retention & Deletion",
-    content: `You may request deletion of your account and all associated data at any time by contacting us at **contact@dj-blue.com**. Upon receiving a verified deletion request, we will:
+    title: "4. How We Use Your Information and Legal Bases",
+    content: `Where GDPR applies, we rely on these legal bases:
 
-- Remove your account information within 30 days
-- Purge all server-side data associated with your account
-- Confirm deletion via your registered email
+- **Service Delivery (Art. 6(1)(b) GDPR):** Account access, subscriptions, and core requested functionality.
+- **Security and Abuse Prevention (Art. 6(1)(f) GDPR):** Service integrity, fraud/abuse detection, and incident response.
+- **Operational Communications (Art. 6(1)(b)/(c) GDPR):** Account, billing, and security notices.
+- **Product Reliability and Improvement (Art. 6(1)(f) GDPR):** Reliability monitoring and feature improvement.
+- **Optional AI Features (Art. 6(1)(b) GDPR and, where required, Art. 6(1)(a) GDPR):** Transcription, summaries, and chatbot features when enabled.
 
-Locally stored data on your device is under your control and can be removed by uninstalling the application.`
+We do **not** sell, rent, or trade personal information to third parties.`
   },
   {
-    title: "5. Security Measures",
-    content: `We employ industry-standard security practices including:
+    title: "5. Data Sharing and Service Providers",
+    content: `We share data with service providers only where needed to operate DJ Blue. Categories include payment processors, infrastructure providers, authentication/account tooling providers, and optional AI providers used for enabled features.
 
-- AES-256 encryption for data at rest
-- TLS 1.3 for all data in transit
-- Regular third-party security audits
-- Role-based access controls for internal systems
-- Automated threat detection and monitoring
-
-In the event of a security incident, affected users will be notified within 72 hours in accordance with applicable regulations.`
+**BYOK role clarification:** If you use your own API key, DJ Blue acts as the software interface. The external provider's legal role is governed by your agreement and configuration with that provider.`
   },
   {
-    title: "6. Cookies & Tracking",
-    content: `DJ Blue uses only essential cookies required for authentication and session management. We do **not** use advertising trackers, third-party analytics scripts, or cross-site tracking mechanisms.
-
-You can manage cookie preferences through your browser settings at any time.`
+    title: "6. International Data Transfers",
+    content: `Some providers may process data outside the EEA/UK. Where applicable, transfers use recognized safeguards, such as adequacy decisions or Article 46 safeguards (including Standard Contractual Clauses), as required by law.`
   },
   {
-    title: "7. Changes to This Policy",
-    content: `We may update this Privacy Policy periodically to reflect changes in our practices or legal requirements. Significant changes will be communicated via email or an in-app notification at least 14 days before taking effect.
+    title: "7. Data Retention",
+    content: `We retain personal data only as long as needed for the purposes described in this policy, including legal, accounting, and security obligations.
 
-The "Last Updated" date at the top of this page indicates when the policy was most recently revised.`
+When retention is no longer necessary, we delete or de-identify data where feasible.`
   },
   {
-    title: "8. Contact Us",
-    content: `If you have questions, concerns, or requests regarding your privacy, please reach out:
+    title: "8. Your GDPR and EU Rights",
+    content: `Where GDPR applies, you may have rights to access, rectify, erase, restrict processing, object, data portability, and withdraw consent where processing is consent-based.
 
-**Email:** contact@dj-blue.com  
-**Response Time:** Within 2 business days`
+You also have the right to lodge a complaint with your supervisory authority.
+
+To exercise rights regarding data controlled by DJ Blue, contact **privacy@djblue.ai**. We may verify identity before fulfilling requests and respond within legal timelines.`
+  },
+  {
+    title: "9. Security and Incident Notification",
+    content: `We use security measures appropriate to risk, including encryption in transit, access controls, monitoring/logging, and ongoing hardening.
+
+If a personal data breach occurs, notifications will be made to authorities and affected individuals as required by applicable law.`
+  },
+  {
+    title: "10. Cookies and Local Storage",
+    content: `DJ Blue currently uses only storage/cookies that are strictly necessary for core functionality, such as authentication/session handling, local preferences, and local API key configuration where enabled.
+
+If non-essential cookies or similar tracking technologies are introduced, we will request consent where legally required.`
+  },
+  {
+    title: "11. Children's Privacy",
+    content: `DJ Blue is not intended for users under 16. We do not knowingly collect personal data from children.`
+  },
+  {
+    title: "12. Changes to This Policy",
+    content: `We may update this Privacy Policy to reflect changes in legal requirements, product architecture, or operational practices.
+
+The "Last Updated" date at the top of this page indicates the most recent revision.`
+  },
+  {
+    title: "13. Contact Us",
+    content: `If you have questions, concerns, or requests regarding privacy:
+
+**Email:** privacy@djblue.ai  
+**Response Time:** Within 7 business days`
   }
 ];
 
@@ -93,7 +117,7 @@ const Privacy = () => {
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Your privacy is fundamental to everything we build. This policy explains how DJ Blue handles your information with transparency and respect.
             </p>
-            <p className="text-sm text-muted-foreground/60">Last Updated: February 11, 2026</p>
+            <p className="text-sm text-muted-foreground/60">Last Updated: February 15, 2026</p>
           </div>
 
           {/* Sections */}

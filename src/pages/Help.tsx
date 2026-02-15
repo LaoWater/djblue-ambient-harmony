@@ -31,7 +31,7 @@ const faqs = [
   },
   {
     question: "Is my data private and secure?",
-    answer: "Yes. DJ Blue runs locally on your device, and you maintain full control over your data. We never store your conversations on our servers, and all processing happens on your machine.",
+    answer: "DJ Blue can run in local mode and also supports optional cloud processing for enabled AI features. If you use BYOK integrations, requests are sent to the provider tied to your key.",
   },
   {
     question: "What platforms are supported?",
@@ -43,7 +43,7 @@ const faqs = [
   },
   {
     question: "How do I report a bug or request a feature?",
-    answer: "Use the contact form below or email us at support@djblue.ai. We actively review all feedback and prioritize features based on user requests.",
+    answer: "Use the contact form below or email us at privacy@djblue.ai. We actively review all feedback and prioritize features based on user requests.",
   },
 ];
 
@@ -159,10 +159,10 @@ const Help = () => {
                   Or email us directly at
                 </p>
                 <a
-                  href="mailto:support@djblue.ai"
+                  href="mailto:privacy@djblue.ai"
                   className="text-primary hover:underline font-medium"
                 >
-                  support@djblue.ai
+                  privacy@djblue.ai
                 </a>
               </div>
             </div>

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
-import mascot from "@/assets/djblue-mascot.png";
+import singingMascot from "@/assets/singing-mascot.webm";
 
 export const Hero = () => {
   return (
@@ -51,9 +51,9 @@ export const Hero = () => {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <Link to="/signup">
+              <Link to="/download">
                 <Button size="lg" className="group bg-primary hover:bg-primary/90 text-primary-foreground glow">
-                  Get Started
+                  Download Alpha
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
@@ -84,9 +84,12 @@ export const Hero = () => {
           {/* Mascot Image with Effects */}
           <div className="relative animate-float">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-accent/30 rounded-full blur-3xl" />
-            <img
-              src={mascot}
-              alt="DJ Blue Mascot"
+            <video
+              src={singingMascot}
+              autoPlay
+              loop
+              muted
+              playsInline
               className="relative w-full max-w-md mx-auto drop-shadow-2xl"
             />
           </div>
