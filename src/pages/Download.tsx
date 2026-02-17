@@ -62,9 +62,15 @@ const Download = () => {
   const detectedPlatform = useMemo(() => detectClientPlatform(), []);
   const appImageAsset =
     release?.byPlatform.linux.find((asset) => /\.appimage$/i.test(asset.name)) || null;
-  const recommendedPlatform: PlatformKey = appImageAsset
-    ? "linux"
-    : detectedPlatform || "macos";
+  const recommendedPlatform: PlatformKey = useMemo(() => {
+    if (detectedPlatform && release?.bestByPlatform[detectedPlatform]) {
+      return detectedPlatform;
+    }
+    if (release?.bestByPlatform.macos) return "macos";
+    if (release?.bestByPlatform.windows) return "windows";
+    if (release?.bestByPlatform.linux) return "linux";
+    return detectedPlatform || "macos";
+  }, [detectedPlatform, release]);
 
   useEffect(() => {
     let cancelled = false;
@@ -93,7 +99,9 @@ const Download = () => {
   }, []);
 
   const recommendedAsset =
-    appImageAsset || release?.bestByPlatform[recommendedPlatform] || null;
+    (recommendedPlatform === "linux" ? appImageAsset : null) ||
+    release?.bestByPlatform[recommendedPlatform] ||
+    null;
   const releasesUrl = release?.releasesUrl || PROJECT_RELEASES_URL;
 
   return (
