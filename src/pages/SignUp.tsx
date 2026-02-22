@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
 import { Mail, Lock, User } from "lucide-react";
-import logo from "@/assets/djblue-logo_margins.png";
+import logo from "@/assets/djblue-logo_margins_small.png";
 
 const SignUp = () => {
   return (
