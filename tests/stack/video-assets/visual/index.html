@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mascot Video Visual Test</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0b1220;
+        --panel: #111827;
+        --muted: #9ca3af;
+        --text: #f3f4f6;
+        --accent: #38bdf8;
+        --border: #1f2937;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+        background: radial-gradient(circle at 20% 20%, #11223f, var(--bg) 50%);
+        color: var(--text);
+      }
+      main {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 24px;
+        display: grid;
+        gap: 16px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 16px;
+      }
+      .panel {
+        background: color-mix(in srgb, var(--panel) 88%, black);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 16px;
+      }
+      h1, h2 {
+        margin: 0 0 12px;
+        line-height: 1.2;
+      }
+      p, li {
+        color: var(--muted);
+      }
+      video, canvas, img {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: #0b1220;
+      }
+      .row {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      button {
+        border: 1px solid var(--border);
+        background: #0f172a;
+        color: var(--text);
+        border-radius: 10px;
+        padding: 10px 12px;
+        cursor: pointer;
+      }
+      button.primary {
+        background: color-mix(in srgb, var(--accent) 25%, #0f172a);
+        border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+      }
+      code {
+        color: #bfdbfe;
+      }
+      .meta {
+        font-size: 13px;
+      }
+      .status-ok {
+        color: #86efac;
+      }
+      .status-warn {
+        color: #fcd34d;
+      }
+      .status-err {
+        color: #fca5a5;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="panel">
+        <h1>Mascot Video Visual HTML Test</h1>
+        <p>
+          Captures a current frame from the mascot video. Use this to visually validate alpha/WebM
+          behavior and the APNG fallback.
+        </p>
+        <ul>
+          <li>WebM source: <code>/media/singing-mascot.webm</code></li>
+          <li>APNG fallback: <code>/media/singing-mascot-mobile-alpha.png</code></li>
+          <li>Poster: <code>/media/singing-mascot-poster.png</code></li>
+          <li>Download filename: <code>mascot-video-capture.png</code></li>
+        </ul>
+        <p class="meta" id="statusLine">Status: not started</p>
+      </section>
+
+      <section class="grid">
+        <div class="panel">
+          <h2>Source Video (WebM)</h2>
+          <video
+            id="mascotVideo"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            poster="/media/singing-mascot-poster.png"
+            controls
+          >
+            <source src="/media/singing-mascot.webm" type="video/webm" />
+          </video>
+          <div class="row" style="margin-top: 12px">
+            <button id="captureBtn" class="primary">Capture Current Frame</button>
+            <button id="saveBtn">Save Captured Image</button>
+          </div>
+          <p class="meta" id="videoInfo"></p>
+        </div>
+
+        <div class="panel">
+          <h2>APNG Fallback Preview</h2>
+          <img id="apngFallback" alt="APNG fallback preview" src="/media/singing-mascot-mobile-alpha.png" />
+          <p class="meta">Animated image fallback used when WebM video fails.</p>
+        </div>
+
+        <div class="panel">
+          <h2>Canvas Capture</h2>
+          <canvas id="captureCanvas" width="1024" height="1024"></canvas>
+          <p class="meta" id="captureMeta">No capture yet.</p>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      (function () {
+        const DOWNLOAD_NAME = "mascot-video-capture.png";
+
+        const video = document.getElementById("mascotVideo");
+        const canvas = document.getElementById("captureCanvas");
+        const ctx = canvas.getContext("2d");
+        const captureBtn = document.getElementById("captureBtn");
+        const saveBtn = document.getElementById("saveBtn");
+        const captureMeta = document.getElementById("captureMeta");
+        const statusLine = document.getElementById("statusLine");
+        const videoInfo = document.getElementById("videoInfo");
+
+        let capturedDataUrl = null;
+
+        function setStatus(text, kind) {
+          statusLine.textContent = "Status: " + text;
+          statusLine.className = "meta " + (kind ? "status-" + kind : "");
+        }
+
+        function captureFrame() {
+          if (!ctx) {
+            setStatus("canvas context unavailable", "err");
+            return;
+          }
+          const width = video.videoWidth || 1024;
+          const height = video.videoHeight || 1024;
+          canvas.width = width;
+          canvas.height = height;
+          ctx.clearRect(0, 0, width, height);
+          ctx.drawImage(video, 0, 0, width, height);
+          const dataUrl = canvas.toDataURL("image/png");
+          capturedDataUrl = dataUrl;
+          const meta = new Date().toISOString() + " | " + width + "x" + height;
+          captureMeta.textContent = "Captured frame at " + meta;
+          setStatus("captured frame", "ok");
+        }
+
+        function saveCapturedImage() {
+          if (!capturedDataUrl) {
+            setStatus("no captured image to save", "warn");
+            return;
+          }
+          const a = document.createElement("a");
+          a.href = capturedDataUrl;
+          a.download = DOWNLOAD_NAME;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          setStatus("downloaded latest image as " + DOWNLOAD_NAME, "ok");
+        }
+
+        video.addEventListener("loadedmetadata", function () {
+          videoInfo.textContent =
+            "Video metadata: " +
+            (video.videoWidth || "?") +
+            "x" +
+            (video.videoHeight || "?") +
+            " | currentSrc=" +
+            (video.currentSrc || "(not selected yet)");
+          setStatus("video metadata loaded", "ok");
+        });
+
+        video.addEventListener("error", function () {
+          setStatus("video playback error; verify codec support and fallback asset presence", "err");
+        });
+
+        captureBtn.addEventListener("click", captureFrame);
+        saveBtn.addEventListener("click", saveCapturedImage);
+        setStatus("ready", "ok");
+      })();
+    </script>
+  </body>
+</html>

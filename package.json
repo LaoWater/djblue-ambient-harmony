@@ -8,7 +8,13 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "media:generate:mascot-fallbacks": "./scripts/media/generate-mascot-mobile-fallbacks.sh",
+    "media:generate:favicon-ico": "./scripts/media/generate-favicon-ico.sh",
+    "test": "npm run test:conventional",
+    "test:conventional": "node tests/run-all.mjs",
+    "test:stack": "node --test tests/stack",
+    "test:video-assets:visual": "node tests/stack/video-assets/visual/serve.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

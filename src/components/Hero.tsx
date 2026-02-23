@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
-import singingMascot from "@/assets/singing-mascot.webm";
+import { MascotVideo } from "@/components/MascotVideo";
 
 export const Hero = () => {
   return (
@@ -84,14 +84,7 @@ export const Hero = () => {
           {/* Mascot Image with Effects */}
           <div className="relative animate-float">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-accent/30 rounded-full blur-3xl" />
-            <video
-              src={singingMascot}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="relative w-full max-w-md mx-auto drop-shadow-2xl"
-            />
+            <MascotVideo className="relative w-full max-w-md mx-auto drop-shadow-2xl" />
           </div>
         </div>
       </div>

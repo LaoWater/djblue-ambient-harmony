@@ -1,6 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Mail, Twitter, Github, Linkedin } from "lucide-react";
-import logo from "@/assets/djblue-logo_margins_small.png";
 
 const footerLinks = {
   Product: [
@@ -55,7 +54,7 @@ export const Footer = () => {
           <div className="lg:col-span-2 space-y-4">
             <Link to="/" className="flex items-center gap-3 group">
               <div className="w-10 h-10 rounded-lg overflow-hidden ring-2 ring-primary/50 group-hover:ring-primary transition-all duration-300">
-                <img src={logo} alt="DJ Blue" className="w-full h-full object-cover" />
+                <img src="/brand/djblue-logo_margins_small.png" alt="DJ Blue" className="w-full h-full object-cover" />
               </div>
               <span className="text-xl font-display font-bold gradient-text">
                 DJ Blue

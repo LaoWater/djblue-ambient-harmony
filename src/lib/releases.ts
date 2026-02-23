@@ -30,6 +30,11 @@ export type LatestReleaseData = {
   bestByPlatform: Record<PlatformKey, DownloadAsset | null>;
 };
 
+type ClientPlatformSignals = {
+  platformSource: string;
+  isMobileClient: boolean;
+};
+
 const RELEASES_API_URL =
   "https://api.github.com/repos/RaresKeY/dj-blue-ai/releases/latest";
 export const PROJECT_RELEASES_URL =
@@ -83,18 +88,44 @@ const sortAssetsByPreference = (
 };
 
 export const detectClientPlatform = (): PlatformKey | null => {
-  if (typeof navigator === "undefined") return null;
+  const signals = getClientPlatformSignals();
+  if (!signals) return null;
 
-  const uaDataPlatform =
-    (navigator as Navigator & { userAgentData?: { platform?: string } })
-      .userAgentData?.platform || "";
-  const platformSource = `${uaDataPlatform} ${navigator.platform} ${navigator.userAgent}`.toLowerCase();
-
-  if (/mac|darwin|os x/.test(platformSource)) return "macos";
-  if (/win/.test(platformSource)) return "windows";
-  if (/linux|x11/.test(platformSource)) return "linux";
+  if (signals.isMobileClient) return null;
+  if (/windows nt|win32|win64|wow64|wince|\bwin\b/.test(signals.platformSource)) return "windows";
+  if (/\bcros\b/.test(signals.platformSource)) return "linux";
+  if (/macintosh|macintel|macppc|mac68k|macos|os x|darwin/.test(signals.platformSource)) return "macos";
+  if (/linux|x11|ubuntu|debian|fedora|red hat|centos|suse|arch/.test(signals.platformSource)) return "linux";
   return null;
 };
+
+const getClientPlatformSignals = (): ClientPlatformSignals | null => {
+  if (typeof navigator === "undefined") return null;
+
+  const userAgentData = (
+    navigator as Navigator & { userAgentData?: { platform?: string; mobile?: boolean } }
+  ).userAgentData;
+  const uaDataPlatform = userAgentData?.platform || "";
+  const navigatorPlatform = navigator.platform || "";
+  const userAgent = navigator.userAgent || "";
+  const platformSource = `${uaDataPlatform} ${navigatorPlatform} ${userAgent}`.toLowerCase();
+  const maxTouchPoints = typeof navigator.maxTouchPoints === "number" ? navigator.maxTouchPoints : 0;
+
+  // iPadOS Safari can present as "MacIntel"; touch points help distinguish it.
+  const isIpadDesktopMode =
+    /macintel/i.test(navigatorPlatform) &&
+    maxTouchPoints > 1 &&
+    /(safari|applewebkit)/i.test(userAgent);
+  const isMobileClient =
+    userAgentData?.mobile === true ||
+    isIpadDesktopMode ||
+    /android|iphone|ipad|ipod|windows phone|\bmobi\b|\bmobile\b/.test(platformSource);
+
+  return { platformSource, isMobileClient };
+};
+
+export const detectMobileOrTabletClient = (): boolean =>
+  getClientPlatformSignals()?.isMobileClient ?? false;
 
 export const fetchLatestRelease = async (): Promise<LatestReleaseData> => {
   const response = await fetch(RELEASES_API_URL);

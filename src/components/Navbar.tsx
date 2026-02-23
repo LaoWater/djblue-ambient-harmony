@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
-import { Music, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import logo from "@/assets/djblue-logo_margins_small.png";
+import { queryClient } from "@/lib/queryClient";
+import { maintainersQueryOptions } from "@/lib/githubQueries";
 
 const navLinks = [
   { name: "Features", path: "/features" },
@@ -15,6 +16,9 @@ export const Navbar = () => {
   const location = useLocation();
 
   const isActive = (path: string) => location.pathname === path;
+  const prefetchPhilosophyMaintainers = () => {
+    void queryClient.prefetchQuery(maintainersQueryOptions());
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50">
@@ -23,7 +27,7 @@ export const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
             <div className="w-10 h-10 rounded-lg overflow-hidden ring-2 ring-primary/50 group-hover:ring-primary transition-all duration-300">
-              <img src={logo} alt="DJ Blue" className="w-full h-full object-cover" />
+              <img src="/brand/djblue-logo_margins_small.png" alt="DJ Blue" className="w-full h-full object-cover" />
             </div>
             <span className="text-xl font-display font-bold gradient-text">
               DJ Blue
@@ -36,6 +40,8 @@ export const Navbar = () => {
               <Link
                 key={link.path}
                 to={link.path}
+                onMouseEnter={link.path === "/philosophy" ? prefetchPhilosophyMaintainers : undefined}
+                onFocus={link.path === "/philosophy" ? prefetchPhilosophyMaintainers : undefined}
                 className={`text-sm font-medium transition-colors hover:text-primary ${
                   isActive(link.path) ? "text-primary" : "text-muted-foreground"
                 }`}
@@ -80,9 +86,11 @@ export const Navbar = () => {
                 <Link
                   key={link.path}
                   to={link.path}
+                  onMouseEnter={link.path === "/philosophy" ? prefetchPhilosophyMaintainers : undefined}
                   className={`text-sm font-medium transition-colors ${
                     isActive(link.path) ? "text-primary" : "text-muted-foreground"
                   }`}
+                  onFocus={link.path === "/philosophy" ? prefetchPhilosophyMaintainers : undefined}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.name}

@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { MascotVideo } from "@/components/MascotVideo";
 import { Sparkles, Target, Users, Zap } from "lucide-react";
-import singingMascot from "@/assets/singing-mascot.webm";
 
 const values = [
   {
@@ -53,14 +53,7 @@ const About = () => {
 
                 <div className="relative animate-float">
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-accent/30 rounded-full blur-3xl" />
-                  <video
-                    src={singingMascot}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="relative w-full max-w-sm mx-auto drop-shadow-2xl"
-                  />
+                  <MascotVideo className="relative w-full max-w-sm mx-auto drop-shadow-2xl" />
                 </div>
               </div>
 

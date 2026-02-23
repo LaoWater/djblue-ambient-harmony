@@ -3,7 +3,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
 import { Mail, Lock } from "lucide-react";
-import logo from "@/assets/djblue-logo_margins_small.png";
 
 const Login = () => {
   return (
@@ -20,7 +19,7 @@ const Login = () => {
           <div className="text-center space-y-4">
             <Link to="/" className="inline-flex items-center justify-center gap-3 group">
               <div className="w-12 h-12 rounded-xl overflow-hidden ring-2 ring-primary/50 group-hover:ring-primary transition-all duration-300">
-                <img src={logo} alt="DJ Blue" className="w-full h-full object-cover" />
+                <img src="/brand/djblue-logo_margins_small.png" alt="DJ Blue" className="w-full h-full object-cover" />
               </div>
             </Link>
             <div>

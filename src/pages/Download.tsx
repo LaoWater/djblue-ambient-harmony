@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -11,12 +11,12 @@ import {
   RefreshCw,
 } from "lucide-react";
 import {
-  detectClientPlatform,
-  fetchLatestRelease,
-  type LatestReleaseData,
   type PlatformKey,
   PROJECT_RELEASES_URL,
 } from "@/lib/releases";
+import { useQuery } from "@tanstack/react-query";
+import { latestReleaseQueryOptions } from "@/lib/githubQueries";
+import { useClientPlatform } from "@/lib/clientPlatformContext";
 
 const platformMeta: Record<
   PlatformKey,
@@ -55,46 +55,25 @@ const formatPublishedDate = (isoDate: string | undefined): string => {
 };
 
 const Download = () => {
-  const [release, setRelease] = useState<LatestReleaseData | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [loadError, setLoadError] = useState<string | null>(null);
-
-  const detectedPlatform = useMemo(() => detectClientPlatform(), []);
+  const { detectedPlatform, isMobileClient } = useClientPlatform();
+  const {
+    data: release = null,
+    isLoading,
+    error,
+  } = useQuery(latestReleaseQueryOptions);
   const appImageAsset =
     release?.byPlatform.linux.find((asset) => /\.appimage$/i.test(asset.name)) || null;
-  const recommendedPlatform: PlatformKey = appImageAsset
+  const recommendedPlatform: PlatformKey | null = !isMobileClient && appImageAsset
     ? "linux"
-    : detectedPlatform || "macos";
+    : isMobileClient
+      ? null
+      : detectedPlatform;
 
-  useEffect(() => {
-    let cancelled = false;
-
-    const loadRelease = async () => {
-      setIsLoading(true);
-      setLoadError(null);
-      try {
-        const latestRelease = await fetchLatestRelease();
-        if (!cancelled) setRelease(latestRelease);
-      } catch {
-        if (!cancelled) {
-          setRelease(null);
-          setLoadError("Could not load release metadata. Showing fallback links.");
-        }
-      } finally {
-        if (!cancelled) setIsLoading(false);
-      }
-    };
-
-    void loadRelease();
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  const recommendedAsset =
-    appImageAsset || release?.bestByPlatform[recommendedPlatform] || null;
+  const recommendedAsset = recommendedPlatform
+    ? appImageAsset || release?.bestByPlatform[recommendedPlatform] || null
+    : null;
   const releasesUrl = release?.releasesUrl || PROJECT_RELEASES_URL;
+  const loadError = error ? "Could not load release metadata. Showing fallback links." : null;
 
   return (
     <div className="min-h-screen">
@@ -126,7 +105,9 @@ const Download = () => {
                         <DownloadIcon className="w-4 h-4" />
                         {appImageAsset
                           ? "Download AppImage (Linux)"
-                          : `Download for ${platformMeta[recommendedPlatform].label}`}
+                          : recommendedPlatform
+                            ? `Download for ${platformMeta[recommendedPlatform].label}`
+                            : "Download Latest Alpha"}
                       </a>
                     </Button>
                   ) : (
@@ -158,6 +139,13 @@ const Download = () => {
                   )}
                 </div>
 
+                {isMobileClient && (
+                  <p className="text-sm text-sky-200/90 bg-sky-500/10 border border-sky-400/30 rounded-lg px-3 py-2">
+                    Mobile app coming later. DJ Blue Alpha is currently available for desktop only
+                    (macOS, Windows, and Linux).
+                  </p>
+                )}
+
                 {isLoading && (
                   <p className="text-sm text-muted-foreground text-center">
                     Fetching latest release metadata...
@@ -179,7 +167,7 @@ const Download = () => {
                 const Icon = meta.icon;
                 const bestAsset = release?.bestByPlatform[platform] || null;
                 const assetCount = release?.byPlatform[platform]?.length || 0;
-                const isRecommended = platform === recommendedPlatform;
+                const isRecommended = recommendedPlatform === platform;
 
                 return (
                   <div

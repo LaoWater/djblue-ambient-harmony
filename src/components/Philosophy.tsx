@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { ExternalLink, RefreshCw, Users } from "lucide-react";
 import {
-  fetchProjectMaintainers,
   PROJECT_REPO_URL,
   type Maintainer,
 } from "@/lib/maintainers";
+import { maintainersQueryOptions } from "@/lib/githubQueries";
 
 const principles = [
   {
@@ -38,42 +38,17 @@ type PhilosophyProps = {
 };
 
 export const Philosophy = ({ showMaintainers = false }: PhilosophyProps) => {
-  const [maintainers, setMaintainers] = useState<Maintainer[]>([]);
-  const [isLoadingMaintainers, setIsLoadingMaintainers] = useState(showMaintainers);
-  const [maintainersError, setMaintainersError] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!showMaintainers) return;
-
-    let cancelled = false;
-
-    const loadMaintainers = async () => {
-      setIsLoadingMaintainers(true);
-      setMaintainersError(null);
-
-      try {
-        const list = await fetchProjectMaintainers();
-        if (!cancelled) {
-          setMaintainers(list);
-        }
-      } catch {
-        if (!cancelled) {
-          setMaintainers([]);
-          setMaintainersError("Could not load maintainers from GitHub right now.");
-        }
-      } finally {
-        if (!cancelled) {
-          setIsLoadingMaintainers(false);
-        }
-      }
-    };
-
-    void loadMaintainers();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [showMaintainers]);
+  const {
+    data: maintainers = [] as Maintainer[],
+    isLoading: isLoadingMaintainers,
+    error,
+  } = useQuery({
+    ...maintainersQueryOptions(),
+    enabled: showMaintainers,
+  });
+  const maintainersError = error
+    ? "Could not load maintainers from GitHub right now."
+    : null;
 
   return (
     <section className="py-24 relative">
