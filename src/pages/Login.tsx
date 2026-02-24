@@ -43,7 +43,7 @@ const Login = () => {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="you@example.com"
+                  placeholder="contact@dj-blue.com"
                   className="pl-10 glass"
                 />
               </div>

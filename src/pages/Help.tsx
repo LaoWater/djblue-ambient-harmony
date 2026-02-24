@@ -43,7 +43,7 @@ const faqs = [
   },
   {
     question: "How do I report a bug or request a feature?",
-    answer: "Use the contact form below or email us at privacy@djblue.ai. We actively review all feedback and prioritize features based on user requests.",
+    answer: "Use the contact form below or email us at contact@dj-blue.com. We actively review all feedback and prioritize features based on user requests.",
   },
 ];
 
@@ -128,7 +128,7 @@ const Help = () => {
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="email">Email</Label>
-                      <Input id="email" type="email" placeholder="you@example.com" className="glass" />
+                      <Input id="email" type="email" placeholder="contact@dj-blue.com" className="glass" />
                     </div>
                   </div>
 
@@ -159,10 +159,10 @@ const Help = () => {
                   Or email us directly at
                 </p>
                 <a
-                  href="mailto:privacy@djblue.ai"
+                  href="mailto:contact@dj-blue.com"
                   className="text-primary hover:underline font-medium"
                 >
-                  privacy@djblue.ai
+                  contact@dj-blue.com
                 </a>
               </div>
             </div>

@@ -7,7 +7,7 @@ const sections = [
     title: "1. Controller and Project Status",
     content: `DJ Blue is currently operated as a volunteer-run alpha project and is not operated by an incorporated company at this time.
 
-For privacy matters, contact **privacy@djblue.ai**.
+For privacy matters, contact **contact@dj-blue.com**.
 
 If appointment of an EU representative or DPO becomes legally required, those details will be published in this policy.`
   },
@@ -67,7 +67,7 @@ When retention is no longer necessary, we delete or de-identify data where feasi
 
 You also have the right to lodge a complaint with your supervisory authority.
 
-To exercise rights regarding data controlled by DJ Blue, contact **privacy@djblue.ai**. We may verify identity before fulfilling requests and respond within legal timelines.`
+To exercise rights regarding data controlled by DJ Blue, contact **contact@dj-blue.com**. We may verify identity before fulfilling requests and respond within legal timelines.`
   },
   {
     title: "9. Security and Incident Notification",
@@ -95,7 +95,7 @@ The "Last Updated" date at the top of this page indicates the most recent revisi
     title: "13. Contact Us",
     content: `If you have questions, concerns, or requests regarding privacy:
 
-**Email:** privacy@djblue.ai  
+**Email:** contact@dj-blue.com  
 **Response Time:** Within 7 business days`
   }
 ];

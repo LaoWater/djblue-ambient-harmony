@@ -90,7 +90,7 @@ export const Footer = () => {
                 <Linkedin className="w-4 h-4" />
               </a>
               <a
-                href="mailto:hello@djblue.ai"
+                href="mailto:contact@dj-blue.com"
                 className="w-9 h-9 rounded-lg glass flex items-center justify-center hover:bg-primary/20 transition-colors"
               >
                 <Mail className="w-4 h-4" />

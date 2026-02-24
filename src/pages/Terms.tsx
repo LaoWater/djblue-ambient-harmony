@@ -23,7 +23,7 @@ Some features run locally, some may run through BYOK provider integrations, and 
     title: "3. Eligibility and Account Registration",
     content: `To use account-based features, you must provide accurate registration data and keep account credentials secure.
 
-You must notify us promptly of unauthorized account access at **privacy@djblue.ai**.
+You must notify us promptly of unauthorized account access at **contact@dj-blue.com**.
 
 You must be at least 16 years old to use this Service where required by applicable law.`
   },
@@ -69,13 +69,13 @@ Provisions that should survive termination remain in effect.`
 
 Current project ownership and maintainer information are published in the public repository: **https://github.com/RaresKeY/dj-blue-ai**.
 
-Disputes or legal concerns should first be addressed through good-faith discussion via **privacy@djblue.ai**. Mandatory consumer and data-protection rights always apply.`
+Disputes or legal concerns should first be addressed through good-faith discussion via **contact@dj-blue.com**. Mandatory consumer and data-protection rights always apply.`
   },
   {
     title: "10. Contact",
     content: `For terms and legal/privacy questions:
 
-**Email:** privacy@djblue.ai  
+**Email:** contact@dj-blue.com  
 **Response Time:** Within 7 business days`
   }
 ];
